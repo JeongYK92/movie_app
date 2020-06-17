@@ -1,22 +1,38 @@
 import React from 'react';
 
-// jsx + props
-
-// function Food(props) {
-  // return <h1>I like {props.fav}.</h1>;
-function Food({ fav }) {
-  // console.log(props);
-  return <h1>I like {fav}.</h1>;
+// Dynamic Component Generation & map
+/*
+map
+const friends = [ "aaa", "bbb", "ccc", "ddd" ];
+friends.map(current=> {
+  console.log(current);
+  return 0; // return current + "😁";
+}); // 각 아이템 출력, array의 값을 return값으로 변경하고 리턴
+*/
+function Food({ name, picture }) {
+  return (<div>
+    <h2>I like {name}</h2>
+    <img src={picture} alt={name} />
+  </div>);
 }
+
+const foodILike = [
+  {
+    name: "Kimchi",
+    image:
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwoochonfood.com%2Fwp-content%2Fuploads%2F2019%2F05%2F%25EB%25B0%25B0%25EC%25B6%2594%25EA%25B9%2580%25EC%25B9%2598-Napa-Cabbage-Kimchi.jpg&f=1&nofb=1"
+  },
+  {
+    name: "Ramen",
+    image:
+      "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcfile24.uf.tistory.com%2Fimage%2F1126D0405101E9FE038AB4&f=1&nofb=1"
+  }
+]
 
 function App() {
   return (
     <div>
-      <h1>Hello?</h1>
-      {/* Food component에 fav라는 이름의 property(prop)를 kimchi라는 value로 할당 */}
-      {/* component는 대문자로 시작, props는 첫 번째 args로 전달 */}
-      <Food fav="kimchi" something={true} />
-      <Food fav="ramen" something={true} />
+      {foodILike.map(dish => <Food name={dish.name} picture={dish.image} />)}
     </div>
   );
 }
