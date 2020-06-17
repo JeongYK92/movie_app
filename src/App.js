@@ -1,11 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-// All you need to know about State
-
+// Component Life Cycle
+// https://reactjs.org/docs/react-component.html
 /*
-  this.state.count = 1; // Do not mutate state directly. 직접적으로 state를 수정하지 말아라.
-  setState()를 사용, 호출할 때마다 state의 변경, render function이 호출된다.
+  react는 render()를 호출 할 때 여러 함수들을 호출한다.
+  Mounting() : DOM의 탄생,
+   - component가 mount될 때, screen에 표시될 때, website를 표시할 때 등 constructor를 먼저 호출
+   - ? -> render() 호출 -> componentDidMount() 호출
+  Updating() : 일반적인 업데이트, 위와 비슷한 사이클.
+   - render() -> componentDidUpdate()
+  Unmounting() : component가 죽을 때, 페이지 변경, state 교체 등
+   - render() -> componentWillMounting()
 */
 
 class App extends React.Component {
@@ -23,7 +28,20 @@ class App extends React.Component {
     this.setState({count: this.state.count - 1});
   };
 
+  componentDidMount() {
+    console.log("component rendered");
+  }
+
+  componentDidUpdate() {
+    console.log("I just updated");
+  }
+
+  componentWillUnmount() {
+    console.log("Goodbye!");
+  }
+
   render() {
+    console.log("I'm rendering");
     return (
       <div>
         <h1>The number is {this.state.count}</h1>
