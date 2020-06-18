@@ -4,7 +4,7 @@ import "./Navigation.css";
 
 function Navigation() {
   return (
-    <div>
+    <div className="nav">
       {/* 이 경우 html이기 때문에 새로고침을 해버린다. */}
       {/* <a href="/">Home</a>
       <a href="/about">About</a> */}
