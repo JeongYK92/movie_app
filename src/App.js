@@ -3,7 +3,7 @@ import axios from 'axios';
 import Movie from './Movie';
 import "./App.css";
 
-// Styling the Movies
+// Cutting the summary
 
 class App extends React.Component {
   state = {
