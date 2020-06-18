@@ -1,12 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import Movie from './Movie';
 
-// Fetching Movies from API
+// Rendering the Movies
 /*
-  npm install axios
-  fetch 대신 axios, fetch 위에 있는 작은 레이어 느낌?
-  사용 API는 YTS, 그 중 list movies json. ( https://yts-poxy.now.sh/list_movies.json )
-   - YTS는 매번 URL이 변경된다.. 따라서 노마드 코더가 만든 것 사용 ㅎㅎ
+
 */
 
 class App extends React.Component {
@@ -18,7 +16,11 @@ class App extends React.Component {
   // async + await. 비동기 호출
   getMovies = async () => {
     // axios가 끝날 때 까지 await. 기다려라.
-    const movies = await axios.get('https://yts-poxy.now.sh/list_movies.json');
+    // const movies = await axios.get('https://yts-proxy.now.sh/list_movies.json');
+    const { data: { data: { movies } } } = await axios.get('https://yts-proxy.now.sh/list_movies.json?srot_by=rating'); // rating 별 정렬.API 문서가면 있다.
+    // console.log(movies);
+    // console.log(movies.data.data.movies); // movies list
+    this.setState({ movies, isLoading: false }); // this.setState({ movies: movies });
   }
 
   componentDidMount() {
@@ -26,10 +28,16 @@ class App extends React.Component {
   }
 
   render() {
-    const { isLoading } = this.state;
+    const { isLoading, movies } = this.state;
     return(
       <div>
-        { isLoading ? "Loading...": "We are ready" }
+        { isLoading ?
+            "Loading..." :
+            movies.map(movie => {
+              // console.log(movie);
+              return <Movie key={movie.id} id={movie.id} year={movie.year} title={movie.title} summary={movie.summary} poster={movie.medium_cover_image} />
+            })
+        }
       </div>
     );
   }
