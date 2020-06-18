@@ -1,9 +1,12 @@
 import React from 'react';
+import axios from 'axios';
 
-// Planning the Movie Component
+// Fetching Movies from API
 /*
-  이론적으로 할 일은 componentDidMount에서 data를 fetch
-  fetch가 완료되면 표시!
+  npm install axios
+  fetch 대신 axios, fetch 위에 있는 작은 레이어 느낌?
+  사용 API는 YTS, 그 중 list movies json. ( https://yts-poxy.now.sh/list_movies.json )
+   - YTS는 매번 URL이 변경된다.. 따라서 노마드 코더가 만든 것 사용 ㅎㅎ
 */
 
 class App extends React.Component {
@@ -12,8 +15,14 @@ class App extends React.Component {
     movies: [],
   }
 
+  // async + await. 비동기 호출
+  getMovies = async () => {
+    // axios가 끝날 때 까지 await. 기다려라.
+    const movies = await axios.get('https://yts-poxy.now.sh/list_movies.json');
+  }
+
   componentDidMount() {
-    setTimeout(()=> { this.setState({isLoading: false})}, 6000);
+    this.getMovies();
   }
 
   render() {
