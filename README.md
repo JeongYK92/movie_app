@@ -2,4 +2,4 @@
 
 React JS Fundamentals Course! Create Movie App :)
 
-https://jeongyk92.github.io/movie_app/
+https://HelloJeong.github.io/movie_app/
